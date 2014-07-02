@@ -9,16 +9,15 @@
 'use strict';
 
 module.exports = function(grunt) {
-    var exec = require('child_process').exec;
-    var util = require('util');
+    var spawn = require('child_process').spawn;
+    var path = require("path");
 
-  grunt.registerMultiTask('roundhouse', 'Grunt plugin that configures runs RoundhousE db migration app', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-        stdout: true,
-        stderr: true,
-        RH:'../lib/Roundhouse/',
-        rhOptions:{
+    grunt.registerMultiTask('roundhouse', 'Grunt plugin that configures runs RoundhousE db migration app', function() {
+        // Merge task-specific and/or target-specific options with these defaults.
+        var options = this.options({
+            stdout: true,
+            stderr: true,
+            RH:'../lib/Roundhouse/',
             database:'',
             connstring:'',
             sqlfilesdirectory:'',
@@ -47,72 +46,78 @@ module.exports = function(grunt) {
             restorecustomoptions:'',
             restoretimeout:'',
             drop:'',
-            donotcreatedb:'',
+            donotcreatedb:'true',
             warnononetimescriptchanges:'',
             silent:'',
             withtransaction:'',
             recoverymodesimple:'',
             debug:'',
             runallanytimescripts:''
-        }
+        });
+        var done = this.async();
+
+        grunt.verbose.writeln('Using Options: ' + JSON.stringify(options, null, 4).cyan);
+        build(options);
     });
 
-    grunt.verbose.writeln('Using Options: ' + JSON.stringify(options, null, 4).cyan);
+    function build(options) {
+        var cmdArgs = buildCmdLine(options);
+        grunt.log.writeln('Using Command Args:' + cmdArgs);
+        var cp = spawn( path.resolve(options.RH),cmdArgs);
 
-    build(options);
-  });
+        cp.stdout.on('data', function (data) {
+            grunt.log.writeln(data.toString());
+        });
 
-  function build(options) {
-    var cmd = buildCmdLine(options);
-    grunt.verbose.writeln('Using Command:' + cmd.cyan);
+        cp.stderr.on('data', function (data) {
+            grunt.log.writeln('stderr: ' + data.toString());
+        });
 
-    var cp = exec(cmd, {cwd:options.workingDir}, function(code, stdout, stderr) {
-    });
-
-    if (options.stdout || grunt.option('verbose')) {
-        cp.stdout.pipe(process.stdout);
+        setTimeout(function() {
+            cp.stdin.write('echo \n');
+            cp.stdin.end();
+        }, 1000);
     }
-    if (options.stderr || grunt.option('verbose')) {
-        cp.stderr.pipe(process.stderr);
-    }
-  }
-  function buildCmdLine(options) {
-    var arg = options.rhOptions.database==='' ? '': '-d='+options.rhOptions.database;
-      arg += options.rhOptions.connstring==='' ? '' : '-c='+options.rhOptions.connstring;
-      arg += options.rhOptions.sqlfilesdirectory==='' ? '' : '-f='+options.rhOptions.sqlfilesdirectory;
-      arg += options.rhOptions.servername==='' ? '' : '-s='+options.rhOptions.servername;
-      arg += options.rhOptions.connectionstringadministration==='' ? '' : '--csa='+options.rhOptions.connectionstringadministration;
-      arg += options.rhOptions.databasetype==='' ? '' : '--dt='+options.rhOptions.databasetype;
-      arg += options.rhOptions.environment==='' ? '' : '--env='+options.rhOptions.environment;
-      arg += options.rhOptions.output==='' ? '' : '-o='+options.rhOptions.output;
-      arg += options.rhOptions.createdatabasescript==='' ? '' : '--cds='+options.rhOptions.createdatabasescript;
-      arg += options.rhOptions.repositorypath==='' ? '' : '-r='+options.rhOptions.repositorypath;
-      arg += options.rhOptions.versionfile==='' ? '' : '--vf='+options.rhOptions.versionfile;
-      arg += options.rhOptions.versionxpath==='' ? '' : '--vx='+options.rhOptions.versionxpath;
-      arg += options.rhOptions.upfoldername==='' ? '' : '-u='+options.rhOptions.upfoldername;
-      arg += options.rhOptions.runfirstfoldername==='' ? '' : '--rf='+options.rhOptions.runfirstfoldername;
-      arg += options.rhOptions.functionfoldername==='' ? '' : '--fu='+options.rhOptions.functionfoldername;
-      arg += options.rhOptions.viewsfoldername==='' ? '' : '--vw='+options.rhOptions.viewsfoldername;
-      arg += options.rhOptions.sprocsfoldername==='' ? '' : '--sp='+options.rhOptions.sprocsfoldername;
-      arg += options.rhOptions.runafterfoldername==='' ? '' : '--ra='+options.rhOptions.runafterfoldername;
-      arg += options.rhOptions.permissionsfoldername==='' ? '' : '-p='+options.rhOptions.permissionsfoldername;
-      arg += options.rhOptions.schemaname==='' ? '' : '--sc='+options.rhOptions.schemaname;
-      arg += options.rhOptions.versiontablename==='' ? '' : '--vt='+options.rhOptions.versiontablename;
-      arg += options.rhOptions.scriptsruntablename==='' ? '' : '--srp='+options.rhOptions.scriptsruntablename;
-      arg += options.rhOptions.scriptsrunerrorstablename==='' ? '' : '--sret='+options.rhOptions.scriptsrunerrorstablename;
-      arg += options.rhOptions.restore==='' ? '' : '--restore='+options.rhOptions.restore;
-      arg += options.rhOptions.restorefrom==='' ? '' : '--rfp='+options.rhOptions.restorefrom;
-      arg += options.rhOptions.restorecustomoptions==='' ? '' : '--rco='+options.rhOptions.restorecustomoptions;
-      arg += options.rhOptions.restoretimeout==='' ? '' : '--rt='+options.rhOptions.restoretimeout;
-      arg += options.rhOptions.drop==='' ? '' : '--drop='+options.rhOptions.drop;
-      arg += options.rhOptions.donotcreatedb==='' ? '' : '--dnc='+options.rhOptions.donotcreatedb;
-      arg += options.rhOptions.warnononetimescriptchanges==='' ? '' : '-w='+options.rhOptions.warnononetimescriptchanges;
-      arg += options.rhOptions.silent==='' ? '' : '--silent='+options.rhOptions.silent;
-      arg += options.rhOptions.withtransaction==='' ? '' : '-t='+options.rhOptions.withtransaction;
-      arg += options.rhOptions.recoverymodesimple==='' ? '' : '--simple='+options.rhOptions.recoverymodesimple;
-      arg += options.rhOptions.debug==='' ? '' : '--debug='+options.rhOptions.debug;
-      arg += options.rhOptions.runallanytimescripts==='' ? '' : '--runallanytimescripts='+options.rhOptions.runallanytimescripts;
 
-    return util.format("%s %s ", options.RH, arg);
-  }
+    function buildCmdLine(options) {
+        var arg = [];
+
+        if(options.database!=='') {arg.push('/d="'+options.database+'"')};
+        if(options.connstring!=='') {arg.push('/c='+options.connstring)};
+        if(options.sqlfilesdirectory!=='') {arg.push('/f="'+options.sqlfilesdirectory+'"')};
+        if(options.servername!=='') {arg.push('/s="'+options.servername+'"')};
+        if(options.connectionstringadministration!=='') {arg.push('/csa="'+options.connectionstringadministration+'"')};
+        if(options.databasetype!=='') {arg.push('/dt="'+options.databasetype+'"')};
+        if(options.environment!=='') {arg.push('/env="'+options.environment+'"')};
+        if(options.output!=='') {arg.push('/o='+options.output)};
+        if(options.createdatabasescript!=='') {arg.push('/cds="'+options.createdatabasescript+'"')};
+        if(options.repositorypath!=='') {arg.push('/r="'+options.repositorypath+'"')};
+        if(options.versionfile!=='') {arg.push('/vf='+options.versionfile)};
+        if(options.versionxpath!=='') {arg.push('/vx="'+options.versionxpath+'"')};
+        if(options.upfoldername!=='') {arg.push('/u="'+options.upfoldername+'"')};
+        if(options.runfirstfoldername!=='') {arg.push('/rf="'+options.runfirstfoldername+'"')};
+        if(options.functionfoldername!=='') {arg.push('/fu="'+options.functionfoldername+'"')};
+        if(options.viewsfoldername!=='') {arg.push('/vw="'+options.viewsfoldername+'"')};
+        if(options.sprocsfoldername!=='') {arg.push('/sp="'+options.sprocsfoldername+'"')};
+        if(options.runafterfoldername!=='') {arg.push('/ra="'+options.runafterfoldername+'"')};
+        if(options.permissionsfoldername!=='') {arg.push('/p="'+options.permissionsfoldername+'"')};
+        if(options.schemaname!=='') {arg.push('/sc="'+options.schemaname+'"')};
+        if(options.versiontablename!=='') {arg.push('/vt="'+options.versiontablename+'"')};
+        if(options.scriptsruntablename!=='') {arg.push('/srp="'+options.scriptsruntablename+'"')};
+        if(options.scriptsrunerrorstablename!=='') {arg.push('/sret="'+options.scriptsrunerrorstablename+'"')};
+        if(options.restore!=='') {arg.push('/restore="'+options.restore+'"')};
+        if(options.restorefrom!=='') {arg.push('/rfp="'+options.restorefrom+'"')};
+        if(options.restorecustomoptions!=='') {arg.push('/rco="'+options.restorecustomoptions+'"')};
+        if(options.restoretimeout!=='') {arg.push('/rt="'+options.restoretimeout+'"')};
+        if(options.drop!=='') {arg.push('/drop="'+options.drop+'"')};
+        if(options.donotcreatedb!=='') {arg.push('/dnc='+options.donotcreatedb)};
+        if(options.warnononetimescriptchanges!=='') {arg.push('/w="'+options.warnononetimescriptchanges+'"')};
+        if(options.silent!=='') {arg.push('/silent="'+options.silent+'"')};
+        if(options.withtransaction!=='') {arg.push('/t="'+options.withtransaction+'"')};
+        if(options.recoverymodesimple!=='') {arg.push('/simple="'+options.recoverymodesimple+'"')};
+        if(options.debug!=='') {arg.push('/debug="'+options.debug+'"')};
+        if(options.runallanytimescripts!=='') {arg.push('/runnallanytimescripts="'+options.runallanytimescripts+'"')};
+
+        return arg;
+    }
 };
