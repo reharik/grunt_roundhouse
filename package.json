@@ -2,22 +2,22 @@
   "name": "grunt-roundhouse",
   "description": "Grunt plugin that configures runs RoundhousE db migration app",
   "version": "0.1.0",
-  "homepage": "https://github.com/rharik/grunt_roundhouse",
+  "homepage": "https://github.com/reharik/grunt_roundhouse",
   "author": {
     "name": "Raif Harik",
     "email": "reharik@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/rharik/grunt_roundhouse.git"
+    "url": "git://github.com/reharik/grunt_roundhouse.git"
   },
   "bugs": {
-    "url": "https://github.com/rharik/grunt_roundhouse/issues"
+    "url": "https://github.com/reharik/grunt_roundhouse/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/rharik/grunt_roundhouse/blob/master/LICENSE-MIT"
+      "url": "https://github.com/reharik/grunt_roundhouse/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {

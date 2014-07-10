@@ -35,7 +35,7 @@ module.exports = function(grunt) {
             functionfoldername:'',
             viewsfoldername:'',
             sprocsfoldername:'',
-            runafterfoldername:'',
+            runafteranytimescriptsfoldername:'',
             permissionsfoldername:'',
             schemaname:'',
             versiontablename:'',
@@ -99,7 +99,7 @@ module.exports = function(grunt) {
         if(options.functionfoldername!=='') {arg.push('/fu="'+options.functionfoldername+'"')};
         if(options.viewsfoldername!=='') {arg.push('/vw="'+options.viewsfoldername+'"')};
         if(options.sprocsfoldername!=='') {arg.push('/sp="'+options.sprocsfoldername+'"')};
-        if(options.runafterfoldername!=='') {arg.push('/ra="'+options.runafterfoldername+'"')};
+        if(options.runafteranytimescriptsfoldername!=='') {arg.push('/ra="'+options.runafteranytimescriptsfoldername+'"')};
         if(options.permissionsfoldername!=='') {arg.push('/p="'+options.permissionsfoldername+'"')};
         if(options.schemaname!=='') {arg.push('/sc="'+options.schemaname+'"')};
         if(options.versiontablename!=='') {arg.push('/vt="'+options.versiontablename+'"')};
