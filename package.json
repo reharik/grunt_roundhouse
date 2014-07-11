@@ -1,7 +1,7 @@
 {
   "name": "grunt-roundhouse",
   "description": "Grunt plugin that configures runs RoundhousE db migration app",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "homepage": "https://github.com/reharik/grunt_roundhouse",
   "author": {
     "name": "Raif Harik",
