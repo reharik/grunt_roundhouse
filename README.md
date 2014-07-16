@@ -233,32 +233,37 @@ This instructs RH to run any time scripts every time it is run. Defaults to fals
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
 
 ```js
 grunt.initConfig({
-  roundhouse: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+  roundhouse:{
+        run:{
+            options:{
+                RH:'somepath/rh.exe',
+                connstring:blahblahblah
+                output:'/somepath/Output',
+                versionfile:'package.json',
+                sqlfilesdirectory:'somepath/mydbname/'
+            }
+        }
     },
-  },
 });
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
 
 ```js
 grunt.initConfig({
-  roundhouse: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+  roundhouse:{
+      run:{
+          options:{
+              RH:'somepath/rh.exe',
+              connstring:blahblahblah
+              output:'/somepath/Output',
+              versionfile:'package.json',
+              sqlfilesdirectory:'somepath/mydbname/'
+          }
+      }
   },
 });
 ```
