@@ -84,7 +84,7 @@ module.exports = function(grunt) {
 
         if(options.database!=='') {arg.push('/d="'+options.database+'"')};
         if(options.connstring!=='') {arg.push('/c='+options.connstring)};
-        if(options.sqlfilesdirectory!=='') {arg.push('/f="'+options.sqlfilesdirectory+'"')};
+        if(options.sqlfilesdirectory!=='') {arg.push('/f='+options.sqlfilesdirectory)};
         if(options.servername!=='') {arg.push('/s="'+options.servername+'"')};
         if(options.connectionstringadministration!=='') {arg.push('/csa="'+options.connectionstringadministration+'"')};
         if(options.databasetype!=='') {arg.push('/dt="'+options.databasetype+'"')};

@@ -26,6 +26,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="roundhouse.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tasks/roundhouse.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="87" column="0" selection-start="2739" selection-end="2739" vertical-scroll-proportion="0.3232662" vertical-offset="1088" max-vertical-offset="2091">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
@@ -35,10 +44,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="15" selection-start="913" selection-end="913" vertical-scroll-proportion="0.7246544" vertical-offset="0" max-vertical-offset="868">
+            <state line="40" column="1" selection-start="937" selection-end="937" vertical-scroll-proportion="-26.153847" vertical-offset="0" max-vertical-offset="782">
               <folding />
             </state>
           </provider>
@@ -56,8 +65,8 @@
       <list>
         <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/tasks/roundhouse.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/tasks/roundhouse.js" />
       </list>
     </option>
   </component>
@@ -132,7 +141,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../grunt_xunit_runner" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -222,9 +231,7 @@
     <entry file="file://$PROJECT_DIR$/tasks/roundhouse.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="107" column="78" selection-start="4627" selection-end="4627" vertical-scroll-proportion="0.0" vertical-offset="1349" max-vertical-offset="2193">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -249,15 +256,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tasks/roundhouse.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="35" selection-start="1316" selection-end="1316" vertical-scroll-proportion="-0.2072177" vertical-offset="875" max-vertical-offset="2193">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="3" selection-start="1511" selection-end="1511" vertical-scroll-proportion="-14.571428" vertical-offset="0" max-vertical-offset="4692">
@@ -267,7 +265,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="15" selection-start="913" selection-end="913" vertical-scroll-proportion="0.7246544" vertical-offset="0" max-vertical-offset="868">
+        <state line="40" column="1" selection-start="937" selection-end="937" vertical-scroll-proportion="-26.153847" vertical-offset="0" max-vertical-offset="782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tasks/roundhouse.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="0" selection-start="2739" selection-end="2739" vertical-scroll-proportion="0.3232662" vertical-offset="1088" max-vertical-offset="2091">
           <folding />
         </state>
       </provider>
